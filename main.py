@@ -11,12 +11,20 @@ if __name__ == '__main__':
 
     game_master = GameMaster(player1_character, player2_character)
     print(f"Player 1 is {player1_character}")
-    print(f"Player 2 is {player2_character} \n\n")
+    print(f"Player 2 is {player2_character} ")
 
     player_turn = 1
     game_master.draw_board()
 
     # Game loop
     while True:
-        pass
+        # Get player move input
+        # Update board with given player move input
+        # Draw updated board
+        # Increment/alternate player turn
+        print(f"Turn {game_master.player_turn}")
+        player_move = input(f"Player {player_turn}, what's your move? ")
+        game_master.update_board(player_turn, player_move)
+        game_master.draw_board()
+        player_turn = player_turn % 2 + 1
 
