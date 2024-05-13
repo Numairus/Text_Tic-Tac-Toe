@@ -13,17 +13,26 @@ if __name__ == '__main__':
     print(f"Player 1 is {player1_character}")
     print(f"Player 2 is {player2_character} ")
 
+    game_continues = True
     # Game loop
-    while True:
+    while game_continues:
         # Increment/alternate player turn
         # Draw board
         # Get player move input
         # Update board with given player move input
 
-        game_master.next_turn()
         print(f"Turn {game_master.player_turn}")
         game_master.draw_board()
-        player_move = input(f"Player {game_master.player_turn}, what's your move? ")
-        game_master.update_board(player_move)
 
+        # If player move is valid: update board, else correct player and ask again
+        while True:
+            player_move = input(f"Player {game_master.player_turn}, what's your move? ")
 
+            if game_master.is_move_valid(player_move):
+                game_continues = game_master.update_board()
+                break
+            else:
+                continue
+
+    print(f"Congrats! Player {game_master.player_turn} wins!")
+    game_master.draw_board()

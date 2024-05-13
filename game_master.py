@@ -3,7 +3,8 @@ class GameMaster:
         self.board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
         self.player1_character = p1_char
         self.player2_character = p2_char
-        self.player_turn = 0
+        self.player_turn = 1
+        self.player_move = -1
         self.diagonals = [2, 6, 4, 0, 8]
 
     def win_check(self, play):
@@ -17,11 +18,7 @@ class GameMaster:
             horizontal = self.check_horizontal(play)
             vertical = self.check_vertical(play)
 
-        print(f"horizontal check is {horizontal}")
-        print(f"vertical check is {vertical}")
-        print(f"diagonal check is {diagonal}")
         return True in [horizontal, vertical, diagonal]
-
 
     def check_horizontal(self, p):
         # Check values on the same row to see if they're all the same
@@ -66,18 +63,38 @@ class GameMaster:
         print(f" {self.board[6]} | {self.board[7]} | {self.board[8]}")
 
     def player_turn(self):
-        player_move = input(f"Player {self.player_turn() + 1}, what's your move? ")
+        player_move = input(f"Player {self.player_turn + 1}, what's your move? ")
 
-    def update_board(self, position):
-        i = int(position) - 1
+    def update_board(self):
+        p = self.player_move
         player = self.player_turn
 
+        # Update board and check for winning move
         if player == 1:
-            self.board[i] = self.player1_character
+            self.board[p] = self.player1_character
         elif player == 2:
-            self.board[i] = self.player2_character
+            self.board[p] = self.player2_character
 
-        self.win_check(i)
+        # If winning move: break game loop, else advance to next player turn
+        if self.win_check(p):
+            return False
+        else:
+            self.next_turn()
+            return True
 
     def next_turn(self):
         self.player_turn = self.player_turn % 2 + 1
+
+    def is_move_valid(self, position):
+        try:
+            p = int(position) - 1
+        except ValueError:
+            print("Please enter a number 1-9.")
+            return False
+
+        if self.board[p] == "x" or self.board[p] == "o":
+            print("That position has already been chosen. Please choose a valid position")
+            return False
+        else:
+            self.player_move = p
+            return True
