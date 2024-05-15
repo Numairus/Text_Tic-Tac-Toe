@@ -51,9 +51,6 @@ class GameMaster:
         else:
             return False
 
-    def ai_play(self, character, move):
-        self.board[move - 1] = character
-
     def draw_board(self):
         print("")
         print(f" {self.board[0]} | {self.board[1]} | {self.board[2]}")
@@ -61,9 +58,6 @@ class GameMaster:
         print(f" {self.board[3]} | {self.board[4]} | {self.board[5]}")
         print("-----------")
         print(f" {self.board[6]} | {self.board[7]} | {self.board[8]}")
-
-    def player_turn(self):
-        player_move = input(f"Player {self.player_turn + 1}, what's your move? ")
 
     def update_board(self):
         p = self.player_move
