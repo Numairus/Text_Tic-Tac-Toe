@@ -11,7 +11,7 @@ if __name__ == '__main__':
 
     game_master = GameMaster(player1_character, player2_character)
     print(f"Player 1 is {player1_character}")
-    print(f"Player 2 is {player2_character} ")
+    print(f"Player 2 is {player2_character}")
 
     game_continues = True
     # Game loop
@@ -21,7 +21,7 @@ if __name__ == '__main__':
         # Get player move input
         # Update board with given player move input
 
-        print(f"Turn {game_master.player_turn}")
+        print(f"\n\n Turn {game_master.player_turn}")
         game_master.draw_board()
 
         # If player move is valid: update board, else correct player and ask again
@@ -34,5 +34,5 @@ if __name__ == '__main__':
             else:
                 continue
 
-    print(f"Congrats! Player {game_master.player_turn} wins!")
+    print(f"\n\n Congrats! Player {game_master.player_turn} wins!")
     game_master.draw_board()
